@@ -6,6 +6,7 @@ const validator = require("validator");
 const fileupload = require("express-fileupload");
 const session = require("express-session");
 const mysql = require("mysql");
+require("dotenv").config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -15,6 +16,7 @@ app.use(
     limits: { fileSize: 50 * 1024 * 1024 },
   })
 );
+
 // const connection = mysql.createConnection({
 //   host: "localhost",
 //   user: "root",

@@ -15,21 +15,21 @@ app.use(
     limits: { fileSize: 50 * 1024 * 1024 },
   })
 );
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "382001",
-  database: "wwb",
-  port: "3306",
-  insecureAuth: true,
-});
 // const connection = mysql.createConnection({
-//   host: "sql6.freemysqlhosting.net",
-//   user: "sql6580349",
-//   password: "UqdWvDP3rj",
-//   database: "sql6580349",
+//   host: "localhost",
+//   user: "root",
+//   password: "382001",
+//   database: "wwb",
+//   port: "3306",
 //   insecureAuth: true,
 // });
+const connection = mysql.createConnection({
+  host: "sql6.freemysqlhosting.net",
+  user: "sql6580349",
+  password: "UqdWvDP3rj",
+  database: "sql6580349",
+  insecureAuth: true,
+});
 
 const redirectlogin = (req, res, next) => {
   if (!req.session.user_id) {

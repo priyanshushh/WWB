@@ -1,0 +1,75 @@
+<%-include("header")-%>
+<nav id="navid">
+  <div id="user">
+    <div id="user-name"><%=naam%> SAMA</div>
+  </div>
+
+  <ul>
+    <li><a href="/home" class="linka">HOME</a></li>
+    <li><a href="/credit" class="linka">CREDIT</a></li>
+    <li><a href="/debit" class="linka">DEBIT</a></li>
+    <li><a href="/myaccount" class="linka">MY ACCOUNT</a></li>
+  </ul>
+
+  <div id="burger">
+    <div id="burger1"></div>
+    <div id="burger2"></div>
+  </div>
+</nav>
+<div id="bgrbox" class="bgrclass">
+  <ul id="ulid">
+    <li class="liclass"><a href="/home">HOME</a></li>
+    <li class="liclass"><a href="/credit">CREDIT</a></li>
+    <li class="liclass"><a href="/debit">DEBIT</a></li>
+    <li class="liclass"><a href="/myaccount">MY ACCOUNT</a></li>
+  </ul>
+</div>
+<div id="homebegins">
+  <div class="para1">
+    <p id="inpara1">Welcome to <span> WWB,</span></p>
+    <p>This is a project based bank.</p>
+    <p>But you can perform all genral operations of a bank.</p>
+  </div>
+  <button id="readmore">READ MORE</button>
+  <img src="../public/images/graph (2).png" alt="fds" id="graph" />
+</div>
+
+<div id="home2">
+  <img src="../public/images/man.png" alt="man" id="home2-img" />
+  <!-- 
+  <details id="home2-para">
+    <summary>
+      Worried about how to use your money.Well we are here with our experianced
+      employes to help you at any time.
+    </summary>
+    <p>
+      Lorem ipsum aiores obcaecati voluptate praesentium saepe quae, totam,
+      beatae odit? Et velit mea voluptatum dignissimos odit laborum odio
+      molestiae vitae amet, fugiat asperiores est dolore veritatis aspernatur
+      vero.
+    </p>
+  </details> -->
+  <p id="home2-para">
+    Worried about how to use your money.Well we are here with our experianced
+    employes to help you at any time. Lorem ipsum aiores obcaecati voluptate
+    praesentium saepe quae, totam, beatae odit? Et velit mea voluptatum
+    dignissimos odit laborum odio molestiae vitae amet, fugiat asperiores est
+    dolore veritatis aspernatur vero.
+  </p>
+</div>
+
+<div id="home3">
+  <div class="home3-card1" id="home3-card1">
+    <p>Wanna credit some amount in your bank.Click the Credit button.</p>
+    <button id="credit"><a href="/credit"> CREDIT</a></button>
+  </div>
+  <div class="home3-card1" id="home3-card2">
+    <p>Wanna debit some amount in your bank.Click the debit button.</p>
+    <button id="debit"><a href="/debit"> DEBIT</a></button>
+  </div>
+</div>
+
+<script src="../public/js/bank_design.js"></script>
+<script type="text/javascript" src="../public/js/vanilla-tilt.js"></script>
+<script src="../public/js/3d.js"></script>
+<%-include("footer")-%>

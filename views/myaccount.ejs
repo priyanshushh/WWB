@@ -1,0 +1,82 @@
+<%-include("header")-%>
+<nav id="navid">
+  <ul>
+    <li><a href="/home">HOME</a></li>
+    <li><a href="/credit">CREDIT</a></li>
+    <li><a href="/debit">DEBIT</a></li>
+    <li><a href="/myaccount">MY ACCOUNT</a></li>
+  </ul>
+
+  <div id="burger">
+    <div id="burger1"></div>
+    <div id="burger2"></div>
+  </div>
+</nav>
+<div id="bgrbox" class="bgrclass">
+  <ul id="ulid">
+    <li class="liclass"><a href="/home">HOME</a></li>
+    <li class="liclass"><a href="/credit">CREDIT</a></li>
+    <li class="liclass"><a href="/debit">DEBIT</a></li>
+    <li class="liclass"><a href="/myaccount">MY ACCOUNT</a></li>
+  </ul>
+</div>
+<main id="my_main">
+  <div id="pic" class="my_page">
+    <img id="picid" name="userpi" src="<%=userpicc%>" alt="user profile" />
+  </div>
+
+  <div id="dabba">
+    <table id="tble">
+      <tr>
+        <td>Account No.</td>
+        <td><span id="numbr"><%=tacc%></span></td>
+      </tr>
+      <tr>
+        <td>NAME</td>
+        <td id="tdid1"><%=tname%></td>
+      </tr>
+      <tr>
+        <td>GMAIL</td>
+        <td id="gid" class="tdid1"><%=tmail%></td>
+      </tr>
+      <tr>
+        <td>ADDRESS</td>
+        <td><span id="numbr"><%=tadd%></span></td>
+      </tr>
+      <tr>
+        <td>FATHER'S NAME</td>
+        <td id="tdid1"><%=tfather%></td>
+      </tr>
+
+      <tr>
+        <td>PHONE NO.</td>
+        <td class="tdid1"><%=tpno%></td>
+      </tr>
+      <tr>
+        <td>CURRENT AMMOUNT</td>
+        <td class="tdid1"><%=tamnt%> &nbsp Rs.</td>
+      </tr>
+    </table>
+    <div id="logdel">
+      <form
+        action="/delete"
+        method="POST"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <button id="delete" class="acc_handle" type="submit">
+          DEL ACCOUNT
+        </button>
+      </form>
+      <form
+        action="/logout"
+        method="POST"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <button id="edit" class="acc_handle" type="submit">LOG-OUT</button>
+      </form>
+    </div>
+  </div>
+</main>
+<footer class="footer"></footer>
+
+<script src="../public/js/bank_design.js"></script>

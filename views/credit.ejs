@@ -1,0 +1,43 @@
+<%-include("header")-%>
+    <nav id="navid">
+
+
+
+
+        <ul>
+            <li><a href="/home">HOME</a></li>
+            <li><a href="/credit">CREDIT</a></li>
+            <li><a href="/debit">DEBIT</a></li>
+            <li><a href="/myaccount">MY ACCOUNT</a></li>
+
+        </ul>
+
+
+        <div id="burger">
+            <div id="burger1"></div>
+            <div id="burger2"></div>
+
+        </div>
+    </nav>
+    <div id="bgrbox" class="bgrclass">
+        <ul id="ulid">
+            <li class="liclass"><a href="/home">HOME</a></li>
+            <li class="liclass"><a href="/credit">CREDIT</a></li>
+            <li class="liclass"><a href="/debit">DEBIT</a></li>
+            <li class="liclass"><a href="/myaccount">MY ACCOUNT</a></li>
+
+        </ul>
+    </div>
+    <div class="logindiv">
+        <h2 class="creditdebitclass">CREDIT</h2>
+        <form class="login-form" action="/credit" method="POST" enctype="application/x-www-form-urlencoded">
+
+            <input type="text" class="login-class" name="cmoney" placeholder="ENTER YOUR AMMOUNT ">
+            <input type="text" class="login-class" name="cacc" placeholder="ENTER YOUR ACCOUNT NUMBER ">
+            <input type="password" class="login-class" name="cpass" placeholder="ENTER YOUR PASSWORD">
+            <button class="submit" type="submit">SUBMIT</button>
+        </form>
+    </div>
+    <footer class="footer"></footer>
+
+    <script src="../public/js/bank_design.js"></script>

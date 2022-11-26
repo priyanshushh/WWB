@@ -24,11 +24,11 @@ app.use(
 //   insecureAuth: true,
 // });
 const connection = mysql.createConnection({
-  host: "sql6.freemysqlhosting.net",
-  user: "sql6580349",
-  password: "UqdWvDP3rj",
-  database: "sql6580349",
-  insecureAuth: true,
+  host: process.env.Host,
+  user: process.env.User,
+  password: process.env.Password,
+  database: process.env.Database,
+  insecureAuth: process.env.InsecureAuth,
 });
 
 const redirectlogin = (req, res, next) => {

@@ -49,7 +49,7 @@ const redirecthome = (req, res, next) => {
   }
 };
 
-let time = 1000 * 60 * 60 * 2;
+let time = 1000 * 60 * 15;
 
 const {
   port = process.env.port || 3000,
@@ -61,10 +61,12 @@ app.use(
   session({
     name: sess_name,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: sec_var,
+    resave: false,
+    maxAge: sess_time,
     cookie: {
-      maxAge: time,
+      secure: true,
       sameSite: true,
     },
   })

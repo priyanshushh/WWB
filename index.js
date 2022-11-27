@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const validator = require("validator");
 const fileupload = require("express-fileupload");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
 const mysql = require("mysql");
 require("dotenv").config();
 app.use(bodyParser.json());
@@ -49,23 +49,26 @@ const redirecthome = (req, res, next) => {
   }
 };
 
-let time = 1000 * 60 * 60 * 2;
+let time = 1000 * 60 * 15;
 
 const {
   port = process.env.Port || 3000,
   sec_var = "thatsIsSecret",
   sess_name = "sid",
   sess_time = time,
-  key1 = "mykey1",
-  key2 = "mykey2",
 } = process.env;
 app.use(
-  cookieSession({
+  session({
     name: sess_name,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: sec_var,
-    keys: [key1, key2],
+    resave: false,
+    maxAge: sess_time,
+    cookie: {
+      secure: true,
+      sameSite: true,
+    },
   })
 );
 var a = [];
@@ -326,6 +329,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(process.env.Port || 3000, () => {
-  console.log("Listening on port" + port);
+app.listen(port, () => {
+  console.log("Listening on port 3000");
 });

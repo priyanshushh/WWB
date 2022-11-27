@@ -52,7 +52,7 @@ const redirecthome = (req, res, next) => {
 let time = 1000 * 60 * 15;
 
 const {
-  port = process.env.port || 3000,
+  port = process.env.Port || 3000,
   sec_var = "thatsIsSecret",
   sess_name = "sid",
   sess_time = time,

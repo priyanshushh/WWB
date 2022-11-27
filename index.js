@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const validator = require("validator");
 const fileupload = require("express-fileupload");
-const session = require("express-session");
+const cookieSession = require("cookie-session");
 const mysql = require("mysql");
 require("dotenv").config();
 app.use(bodyParser.json());
@@ -56,17 +56,16 @@ const {
   sec_var = "thatsIsSecret",
   sess_name = "sid",
   sess_time = time,
+  key1 = "mykey1",
+  key2 = "mykey2",
 } = process.env;
 app.use(
-  session({
+  cookieSession({
     name: sess_name,
     resave: false,
     saveUninitialized: false,
     secret: sec_var,
-    cookie: {
-      maxAge: time,
-      sameSite: true,
-    },
+    keys: [key1, key2],
   })
 );
 var a = [];

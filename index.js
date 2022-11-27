@@ -326,6 +326,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(port, () => {
+app.listen(process.env.Port || 3000, () => {
   console.log("Listening on port" + port);
 });

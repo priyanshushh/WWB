@@ -61,12 +61,10 @@ app.use(
   session({
     name: sess_name,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     secret: sec_var,
-    resave: false,
-    maxAge: sess_time,
     cookie: {
-      secure: true,
+      maxAge: time,
       sameSite: true,
     },
   })

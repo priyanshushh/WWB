@@ -51,18 +51,12 @@ const redirecthome = (req, res, next) => {
 
 let time = 1000 * 60 * 15;
 
-const {
-  port = process.env.Port,
-  sec_var = "thatsIsSecret",
-  sess_name = "sid",
-  sess_time = time,
-} = process.env;
 app.use(
   session({
-    name: sess_name,
+    name: process.env.sess_name,
     resave: false,
     saveUninitialized: false,
-    secret: sec_var,
+    secret: process.env.sec_var,
     cookie: {
       maxAge: time,
       sameSite: true,
@@ -73,7 +67,6 @@ var a = [];
 
 app.get("/foorm", (req, res) => {
   res.render("foorm");
-  // res.sendFile(path.join(__dirname, "../public", "login.html"));
 });
 app.post("/foorm", (req, res) => {
   let samplefile;
@@ -96,12 +89,10 @@ app.post("/foorm", (req, res) => {
 app.get("/", (req, res) => {
   const { user_id } = req.session;
   res.render("BANK");
-  // res.sendFile(path.join(__dirname, "../public", "BANK.html"));
 });
 
 app.get("/signin", redirecthome, (req, res) => {
   res.render("signin");
-  // res.sendFile(path. join(__dirname, "../public", "signin.html"));
 });
 
 app.post("/signin", redirecthome, (req, res) => {
@@ -164,7 +155,6 @@ app.post("/signin", redirecthome, (req, res) => {
             req.session.user_id = a[0].account;
 
             res.redirect("/home");
-            // res.render("home", { naam: req.body.name1 });
           }
         );
       }
@@ -174,7 +164,6 @@ app.post("/signin", redirecthome, (req, res) => {
 
 app.get("/login", redirecthome, (req, res) => {
   res.render("login");
-  // res.sendFile(path.join(__dirname, "../public", "login.html"));
 });
 
 app.post("/login", redirecthome, (req, res) => {
@@ -219,12 +208,9 @@ app.get("/home", redirectlogin, (req, res) => {
   } else {
     res.render("home", { naam: req.body.name1 });
   }
-
-  // res.sendFile(path.join(__dirname, "../public", "home.html"));
 });
 app.get("/credit", redirectlogin, (req, res) => {
   res.render("credit");
-  // res.sendFile(path.join(__dirname, "../public", "credit.html"));
 });
 app.post("/credit", redirectlogin, (req, res) => {
   let accvalue = a[0].account;
@@ -254,7 +240,6 @@ app.post("/credit", redirectlogin, (req, res) => {
 
 app.get("/debit", redirectlogin, (req, res) => {
   res.render("debit");
-  // res.sendFile(path.join(__dirname, "../public", "debit.html"));
 });
 
 app.post("/debit", redirectlogin, (req, res) => {

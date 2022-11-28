@@ -49,7 +49,7 @@ const redirecthome = (req, res, next) => {
   }
 };
 
-let time = 1000 * 60 * 15;
+let time = 1000 * 60 * 60 * 2;
 
 app.use(
   session({
@@ -312,6 +312,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(process.env.Port || 1337, () => {
+app.listen(process.env.Port || 3000, () => {
   console.log("Listening on port 3000");
 });

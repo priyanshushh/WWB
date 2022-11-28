@@ -312,6 +312,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(process.env.Port || 3000, () => {
+app.listen(process.env.Port || 1337, () => {
   console.log("Listening on port 3000");
 });

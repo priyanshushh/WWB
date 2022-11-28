@@ -172,6 +172,9 @@ app.post("/login", redirecthome, (req, res) => {
     (error, result) => {
       if (error) res.send("wrong account number or password");
       a = result;
+      alert(
+        "please check your account number from the my account page or you will not be able to login again"
+      );
       req.session.user_id = a[0].account;
       if (req.body.passwrd === a[0].password) {
         res.redirect("/home");
@@ -312,6 +315,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(process.env.Port || 3000, () => {
+app.listen(process.env.Port || 1337, () => {
   console.log("Listening on port 3000");
 });

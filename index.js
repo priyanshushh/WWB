@@ -172,7 +172,7 @@ app.post("/login", redirecthome, (req, res) => {
     (error, result) => {
       if (error) res.send("wrong account number or password");
       a = result;
-      req.session.user_id = a[0].account;
+      req.session.user_id == a[0].account;
       if (req.body.passwrd === a[0].password) {
         res.redirect("/home");
       } else res.send("wrong account number or password");

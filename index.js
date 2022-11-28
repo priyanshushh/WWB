@@ -25,26 +25,6 @@ app.use(
 //   port: "3306",
 //   insecureAuth: true,
 // });
-let time = 1000 * 60 * 15;
-
-port = process.env.Port || 3000;
-// const {
-//   sec_var = "thatsIsSecret",
-//   sess_name = "sid",
-//   sess_time = time,
-// } = process.env;
-// app.use(
-//   session({
-//     name: sess_name,
-//     resave: false,
-//     saveUninitialized: false,
-//     secret: sec_var,
-//     cookie: {
-//       maxAge: time,
-//       sameSite: true,
-//     },
-//   })
-// );
 const connection = mysql.createConnection({
   host: process.env.Host,
   user: process.env.User,
@@ -53,22 +33,42 @@ const connection = mysql.createConnection({
   insecureAuth: process.env.InsecureAuth,
 });
 
-// const redirectlogin = (req, res, next) => {
-//   if (!req.session.user_id) {
-//     res.redirect("/");
-//   } else {
-//     next();
-//   }
-// };
+const redirectlogin = (req, res, next) => {
+  if (!req.session.user_id) {
+    res.redirect("/");
+  } else {
+    next();
+  }
+};
 
-// const redirecthome = (req, res, next) => {
-//   if (req.session.user_id) {
-//     res.redirect("/home");
-//   } else {
-//     next();
-//   }
-// };
+const redirecthome = (req, res, next) => {
+  if (req.session.user_id) {
+    res.redirect("/home");
+  } else {
+    next();
+  }
+};
 
+let time = 1000 * 60 * 15;
+
+const {
+  port = process.env.Port || 3000,
+  sec_var = "thatsIsSecret",
+  sess_name = "sid",
+  sess_time = time,
+} = process.env;
+app.use(
+  session({
+    name: sess_name,
+    resave: false,
+    saveUninitialized: false,
+    secret: sec_var,
+    cookie: {
+      maxAge: time,
+      sameSite: true,
+    },
+  })
+);
 var a = [];
 
 app.get("/foorm", (req, res) => {
@@ -94,17 +94,17 @@ app.post("/foorm", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  // const { user_id } = req.session;
+  const { user_id } = req.session;
   res.render("BANK");
   // res.sendFile(path.join(__dirname, "../public", "BANK.html"));
 });
 
-app.get("/signin", (req, res) => {
+app.get("/signin", redirecthome, (req, res) => {
   res.render("signin");
   // res.sendFile(path. join(__dirname, "../public", "signin.html"));
 });
 
-app.post("/signin", (req, res) => {
+app.post("/signin", redirecthome, (req, res) => {
   let samplefile;
   let uploadpath;
   if (!req.files) {
@@ -161,7 +161,7 @@ app.post("/signin", (req, res) => {
               console.log(err);
             }
             a = result;
-            // req.session.user_id = a[0].account;
+            req.session.user_id = a[0].account;
 
             res.redirect("/home");
             // res.render("home", { naam: req.body.name1 });
@@ -172,25 +172,25 @@ app.post("/signin", (req, res) => {
   }
 });
 
-app.get("/login", (req, res) => {
+app.get("/login", redirecthome, (req, res) => {
   res.render("login");
   // res.sendFile(path.join(__dirname, "../public", "login.html"));
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", redirecthome, (req, res) => {
   connection.query(
     "SELECT * FROM users_data WHERE account ='" + req.body.acco + "';",
     (error, result) => {
       if (error) res.send("wrong account number or password");
       a = result;
-      // req.session.user_id = a[0].account;
+      req.session.user_id = a[0].account;
       if (req.body.passwrd === a[0].password) {
         res.redirect("/home");
       } else res.send("wrong account number or password");
     }
   );
 });
-app.get("/myaccount", (req, res) => {
+app.get("/myaccount", redirectlogin, (req, res) => {
   let accval = a[0].account;
   connection.query(
     "SELECT * FROM users_data WHERE account ='" + accval + "';",
@@ -213,7 +213,7 @@ app.get("/myaccount", (req, res) => {
   );
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", redirectlogin, (req, res) => {
   if (a[0].name !== "") {
     res.render("home", { naam: a[0].name });
   } else {
@@ -222,11 +222,11 @@ app.get("/home", (req, res) => {
 
   // res.sendFile(path.join(__dirname, "../public", "home.html"));
 });
-app.get("/credit", (req, res) => {
+app.get("/credit", redirectlogin, (req, res) => {
   res.render("credit");
   // res.sendFile(path.join(__dirname, "../public", "credit.html"));
 });
-app.post("/credit", (req, res) => {
+app.post("/credit", redirectlogin, (req, res) => {
   let accvalue = a[0].account;
   if (accvalue == req.body.cacc) {
     connection.query(
@@ -252,12 +252,12 @@ app.post("/credit", (req, res) => {
   } else res.send("wrong account number");
 });
 
-app.get("/debit", (req, res) => {
+app.get("/debit", redirectlogin, (req, res) => {
   res.render("debit");
   // res.sendFile(path.join(__dirname, "../public", "debit.html"));
 });
 
-app.post("/debit", (req, res) => {
+app.post("/debit", redirectlogin, (req, res) => {
   let accountvalue = a[0].account;
   if (accountvalue == req.body.dacc) {
     connection.query(
@@ -313,20 +313,20 @@ app.get("/gett", (req, res) => {
   });
 });
 
-app.post("/logout", (req, res) => {
-  // req.session.destroy((err) => {
-  //   if (err) {
-  //     return res.redirect("/");
-  //   }
-  //   res.clearCookie(sess_name);
-  // });
-  res.redirect("/");
+app.post("/logout", redirectlogin, (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect("/");
+    }
+    res.clearCookie(sess_name);
+    res.redirect("/");
+  });
 });
 
 app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(port, "0.0.0.0", () => {
-  console.log("Listening on port " + port);
+app.listen(port, () => {
+  console.log("Listening on port 3000");
 });

@@ -327,6 +327,6 @@ app.get("*", (req, res) => {
   res.send("404");
 });
 
-app.listen(port, () => {
-  console.log("Listening on port 3000");
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on port " + port);
 });

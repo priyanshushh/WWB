@@ -25,6 +25,26 @@ app.use(
 //   port: "3306",
 //   insecureAuth: true,
 // });
+let time = 1000 * 60 * 15;
+
+const {
+  port = process.env.Port || 3000,
+  sec_var = "thatsIsSecret",
+  sess_name = "sid",
+  sess_time = time,
+} = process.env;
+app.use(
+  session({
+    name: sess_name,
+    resave: false,
+    saveUninitialized: false,
+    secret: sec_var,
+    cookie: {
+      maxAge: time,
+      sameSite: true,
+    },
+  })
+);
 const connection = mysql.createConnection({
   host: process.env.Host,
   user: process.env.User,
@@ -49,26 +69,6 @@ const redirecthome = (req, res, next) => {
   }
 };
 
-let time = 1000 * 60 * 15;
-
-const {
-  port = process.env.Port || 3000,
-  sec_var = "thatsIsSecret",
-  sess_name = "sid",
-  sess_time = time,
-} = process.env;
-app.use(
-  session({
-    name: sess_name,
-    resave: false,
-    saveUninitialized: false,
-    secret: sec_var,
-    cookie: {
-      maxAge: time,
-      sameSite: true,
-    },
-  })
-);
 var a = [];
 
 app.get("/foorm", (req, res) => {

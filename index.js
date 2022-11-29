@@ -49,8 +49,6 @@ const redirecthome = (req, res, next) => {
   }
 };
 
-let time = 1000 * 60 * 60 * 2;
-
 app.use(
   session({
     name: process.env.sess_name,
@@ -58,7 +56,7 @@ app.use(
     saveUninitialized: false,
     secret: process.env.sec_var,
     cookie: {
-      maxAge: time,
+      maxAge: process.env.time,
       sameSite: true,
     },
   })
